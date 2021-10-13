@@ -1,6 +1,6 @@
 {
   "name": "@zhangqc/plugin-dumi-vue",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "lib/index.js",
   "description": "dumi插件 用于展示 vue sfc 组件",
   "authors": {
@@ -15,9 +15,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/umijs/umi"
+    "url": "https://github.com/kkaaddff/plugin-dumi-vue"
   },
-  "homepage": "https://github.com/umijs/umi/tree/master/packages/bundler-webpack#readme",
+  "homepage": "https://github.com/kkaaddff/plugin-dumi-vue",
   "scripts": {
     "start": "cross-env APP_ROOT=example umi dev",
     "build": "father-build",

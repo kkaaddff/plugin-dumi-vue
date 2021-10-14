@@ -29,6 +29,28 @@ export default {
 };
 ```
 
+使用 markdown 的 `html` 标签做为标识使用 `preview` 告诉 `dumi` 需要渲染这部分代码
+
+```html ｜ preview
+<template>
+  <div id="app">my-vue-app</div>
+</template>
+
+<script>
+  export default {
+    name: 'app',
+    components: {},
+  };
+</script>
+
+<style>
+  #app {
+    text-align: center;
+    color: #2c3e50;
+  }
+</style>
+```
+
 ## Options
 
 TODO

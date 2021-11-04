@@ -4,5 +4,5 @@ node_modules
 .umi-test
 .umi-production
 .DS_Store
-lib
+docs-dist
 dist

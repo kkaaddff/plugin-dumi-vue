@@ -1,8 +1,8 @@
 {
-  "name": "@zhangqc/plugin-dumi-vue",
-  "version": "1.0.5",
+  "name": "@fta/plugin-dumi-vue2",
+  "version": "1.0.0",
   "main": "lib/index.js",
-  "description": "dumi插件 用于展示 vue sfc 组件",
+  "description": "dumi插件 用于展示 vue2 sfc 组件",
   "authors": {
     "name": "kkaaddff",
     "email": "zqc007@gmail.com"

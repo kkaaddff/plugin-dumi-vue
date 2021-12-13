@@ -46,8 +46,7 @@ export default (api: IApi) => {
            * vue compiler 打包后的 js 文件
            */
           //! 注意一定要绝对路径
-          const buildJsPath =
-            '/vue/' + vueRelativePath.replace(/\.vue$/, '.js');
+          const buildJsPath = 'vue/' + vueRelativePath.replace(/\.vue$/, '.js');
 
           /**
            * 3.absVuePath 相对路径
@@ -59,7 +58,7 @@ export default (api: IApi) => {
             path: tempVuePath,
             content: source,
           });
-
+          debugger;
           (globalThis as any).assetsCache.setCache(
             buildVue(absVuePath)
               .catch(err => {
@@ -67,9 +66,7 @@ export default (api: IApi) => {
               })
               .then(res => {
                 return {
-                  path: buildJsPath
-                    .replace(/\.html$/, '.js')
-                    .replace('dumi/', ''),
+                  path: buildJsPath,
                   content: res,
                 };
               }),
@@ -87,7 +84,8 @@ export default (api: IApi) => {
             // demo 渲染器的 props，会传递给上面注册的渲染器组件 即： previewer.js
             // rendererProps: { demoPath: '/vue/Foo/index.js' },
             rendererProps: {
-              demoPath: buildJsPath,
+              // ! 需要加 ‘/’ 修改
+              demoPath: '/' + buildJsPath,
             },
           };
         },

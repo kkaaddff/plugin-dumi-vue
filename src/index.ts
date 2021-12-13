@@ -31,36 +31,43 @@ export default (api: IApi) => {
         }) => {
           const { source, lang } = node.properties;
 
-          const htmlRelativePath = relative(
+          const vueRelativePath = relative(
             api?.paths?.absSrcPath ?? '/',
             mdAbsPath,
-          ).replace(/\.md$/, '.html');
+          ).replace(/\.md$/, '.vue');
 
-          const displayHtmlPath = join('dumi', 'vue', htmlRelativePath);
+          /**
+           * 1.tempVuePath 相对路径
+           * 在调用 umi 的 writeTmpFile 方法时，直接用相对路径即可
+           */
+          const tempVuePath = join('dumi', 'vue', vueRelativePath);
+          /**
+           * 2.tempJsPath js 缓存的路径
+           * vue compiler 打包后的 js 文件
+           */
+          //! 注意一定要绝对路径
+          const buildJsPath =
+            '/vue/' + vueRelativePath.replace(/\.vue$/, '.js');
 
-          const displayHtmlAbsPath = join(
-            api?.paths?.absTmpPath ?? '/',
-            displayHtmlPath,
-          );
+          /**
+           * 3.absVuePath 相对路径
+           * 在使用 vite 手动 compile 时，需要使用绝对路径
+           */
+          const absVuePath = join(api?.paths?.absTmpPath ?? '/', tempVuePath);
 
           api.writeTmpFile({
-            path: displayHtmlPath,
-            content: source,
-          });
-
-          api.writeTmpFile({
-            path: displayHtmlPath.replace(/\.html$/, '.vue'),
+            path: tempVuePath,
             content: source,
           });
 
           (globalThis as any).assetsCache.setCache(
-            buildVue(displayHtmlAbsPath.replace(/\.html$/, '.vue'))
+            buildVue(absVuePath)
               .catch(err => {
                 console.error(err);
               })
               .then(res => {
                 return {
-                  path: displayHtmlPath
+                  path: buildJsPath
                     .replace(/\.html$/, '.js')
                     .replace('dumi/', ''),
                   content: res,
@@ -72,7 +79,7 @@ export default (api: IApi) => {
           return {
             previewerProps: {
               sources: {
-                _: { path: displayHtmlAbsPath },
+                _: { path: absVuePath },
               },
               // 该 demo 依赖的三方库
               dependencies: {},
@@ -80,10 +87,7 @@ export default (api: IApi) => {
             // demo 渲染器的 props，会传递给上面注册的渲染器组件 即： previewer.js
             // rendererProps: { demoPath: '/vue/Foo/index.js' },
             rendererProps: {
-              demoPath: join(
-                '/vue',
-                htmlRelativePath.replace(/\.html$/, '.js'),
-              ),
+              demoPath: buildJsPath,
             },
           };
         },

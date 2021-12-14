@@ -20,7 +20,7 @@
   "homepage": "https://github.com/kkaaddff/plugin-dumi-vue",
   "scripts": {
     "start": "cross-env APP_ROOT=example umi dev",
-    "build": "father-build",
+    "build": "tsc -p tsconfig.json & tsc -p tsconfig-previewer.json",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
@@ -48,7 +48,6 @@
     "body-parser": "^1.18.2",
     "cross-env": "^6.0.3",
     "express": "^4.15.3",
-    "father-build": "^1.17.2",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.8",
     "npm-run-all": "^4.1.5",

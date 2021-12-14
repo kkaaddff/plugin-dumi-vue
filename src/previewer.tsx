@@ -8,10 +8,13 @@ export default function VueContainer(props: { demoPath: string }) {
 
   const init = async () => {
     const demoPath = props.demoPath;
-    let fetchResult = await fetch(demoPath);
-    let result = await fetchResult.text();
-    const vueComp = eval(result);
-    vueInstance.current = new Vue(vueComp).$mount('#' + VUE_COMPONENT_NAME);
+    let fetchResult = await import(/* webpackIgnore: true */ demoPath);
+
+    if (fetchResult.default) {
+      vueInstance.current = new Vue(fetchResult.default).$mount(
+        '#' + VUE_COMPONENT_NAME,
+      );
+    }
   };
 
   useEffect(() => {

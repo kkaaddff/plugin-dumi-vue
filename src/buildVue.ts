@@ -9,7 +9,7 @@ export default async function buildVue(inputPath: string) {
   const bundle = await rollup.rollup(buildConfig);
 
   // generate code and a sourcemap
-  const { output } = await bundle.generate({ format: 'iife' });
+  const { output } = await bundle.generate({ format: 'es' });
   const { code } = output[0] || { code: '' };
   return code;
 }

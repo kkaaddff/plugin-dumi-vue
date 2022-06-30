@@ -30,7 +30,6 @@ export default (api: IApi) => {
           node: any;
         }) => {
           const { source, lang } = node.properties;
-
           const vueRelativePath = relative(
             api?.paths?.absSrcPath ?? '/',
             mdAbsPath,
@@ -58,13 +57,13 @@ export default (api: IApi) => {
             path: tempVuePath,
             content: source,
           });
-          debugger;
+
           (globalThis as any).assetsCache.setCache(
             buildVue(absVuePath)
-              .catch(err => {
+              .catch((err) => {
                 console.error(err);
               })
-              .then(res => {
+              .then((res) => {
                 return {
                   path: buildJsPath,
                   content: res,
@@ -93,8 +92,7 @@ export default (api: IApi) => {
     },
   });
 
-  api.chainWebpack(config => {
-    config.resolve.alias.set('vue$', 'vue/dist/vue.esm.js');
+  api.chainWebpack((config) => {
     config.plugin('copy-process-assets-plugin').use(CopyPlugin);
     return config;
   });

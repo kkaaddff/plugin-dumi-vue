@@ -5,18 +5,15 @@ const resolveCahe = () => {
   // @ts-ignore
   const { assetsCache } = globalThis;
   const cacheList = assetsCache.getCache();
-  assetsCache.clearCache();
   return new Promise((resolve, reject) => {
-    Promise.all(cacheList)
-      .then(resolve)
-      .catch(reject);
+    Promise.all(cacheList).then(resolve).catch(reject);
   });
 };
 
 class CopyPlugin {
   apply(compiler: Compiler) {
     // @ts-ignore
-    compiler.hooks.thisCompilation.tap('copy-process-assets', compilation => {
+    compiler.hooks.thisCompilation.tap('copy-process-assets', (compilation) => {
       compilation.hooks.additionalAssets.tapAsync(
         'copy-process-assets-plugin',
         async (callback: () => void) => {

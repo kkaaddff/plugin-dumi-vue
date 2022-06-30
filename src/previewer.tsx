@@ -8,19 +8,31 @@ export default function VueContainer(props: { demoPath: string }) {
 
   const init = async () => {
     const demoPath = props.demoPath;
+
     let fetchResult = await import(/* webpackIgnore: true */ demoPath);
+    // @ts-ignore
 
     if (fetchResult.default) {
       vueInstance.current = new Vue(fetchResult.default).$mount(
         '#' + VUE_COMPONENT_NAME,
       );
+      // vueInstance.current = new Vue({
+      //   template: `
+      //     <div id="app">
+      //       {{ message }}
+      //       <van-button>按钮</van-button>
+      //     </div>`,
+      //   data: {
+      //     message: 'Hello Vue!',
+      //   },
+      // }).$mount('#' + VUE_COMPONENT_NAME);
     }
   };
 
   useEffect(() => {
     init();
     return () => {
-      vueInstance.current.$destroy?.();
+      vueInstance.current?.$destroy();
     };
   }, []);
 

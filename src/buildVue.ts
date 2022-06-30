@@ -1,11 +1,15 @@
-import { createVuePlugin as vue2 } from 'vite-plugin-vue2';
-import { viteExternalsPlugin } from 'vite-plugin-externals';
 import { build } from 'vite';
 import path from 'path';
 
 export default async function buildVue(inputPath: string) {
+  const { name } = require(path.join(process.cwd(), 'package.json'));
+
   const bundle = await build({
-    configFile: false,
+    resolve: {
+      alias: {
+        [name]: path.join(process.cwd(), 'src'),
+      },
+    },
     build: {
       cssCodeSplit: true,
       lib: {
@@ -19,21 +23,7 @@ export default async function buildVue(inputPath: string) {
         include: /node_modules|packages/,
       },
       outDir: path.join(path.dirname(inputPath), 'dist'),
-      rollupOptions: {
-        external: ['vue', 'vant'],
-      },
     },
-
-    plugins: [
-      vue2({
-        target: 'esnext',
-      }),
-      // external插件件必须在createVuePlugin下面
-      viteExternalsPlugin({
-        vue: 'window.Vue',
-        vant: 'window.vant',
-      }),
-    ],
   });
 
   const output = bundle[0].output;

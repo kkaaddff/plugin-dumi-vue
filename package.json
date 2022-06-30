@@ -1,6 +1,6 @@
 {
   "name": "@fta/plugin-dumi-vue2",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "main": "lib/index.js",
   "description": "dumi插件 用于展示 vue2 sfc 组件",
   "authors": {
@@ -46,21 +46,19 @@
     "cross-env": "^6.0.3",
     "lint-staged": "^10.0.8",
     "umi": "^3.1.0",
+    "vite": "^2.9.13",
+    "vue": "^2.6.14",
     "yorkie": "^2.0.0"
   },
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
+    "vite-plugin-externals": "^0.5.0",
     "vite-plugin-vue2": "^2.0.1",
     "vite": "^2.9.13",
-    "vite-plugin-externals": "^0.5.0",
-    "vue-template-compiler":"^2.6.14",
+    "vue-template-compiler": "^2.6.14",
     "vue": "^2.6.14",
-    "webpack": "4.46.0",
-    "webpack-sources": "1.4.3"
-  },
-  "peerDependencies": {
-    "vue": "^2.6.14",
-    "webpack": "4.46.0",
-    "webpack-sources": "1.4.3"
+    "webpack-sources": "1.4.3",
+    "webpack": "4.46.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

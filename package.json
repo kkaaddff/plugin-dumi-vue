@@ -1,6 +1,6 @@
 {
   "name": "@fta/plugin-dumi-vue2",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "main": "lib/index.js",
   "description": "dumi插件 用于展示 vue2 sfc 组件",
   "authors": {
@@ -21,6 +21,7 @@
   "scripts": {
     "start": "cross-env APP_ROOT=example umi dev",
     "build": "tsc -p tsconfig.json & tsc -p tsconfig-previewer.json",
+    "prepublishOnly": "npm run build",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",

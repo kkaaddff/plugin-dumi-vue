@@ -96,4 +96,14 @@ export default (api: IApi) => {
     config.plugin('copy-process-assets-plugin').use(CopyPlugin);
     return config;
   });
+
+  api.addTmpGenerateWatcherPaths(() => [
+    join(api.paths.absSrcPath ?? '', '**/*.vue'),
+  ]);
+
+  api.onGenerateFiles(({ files }) => {
+    if (files.length > 0 && files.some((file) => file.path.endsWith('.vue'))) {
+      api.restartServer();
+    }
+  });
 };

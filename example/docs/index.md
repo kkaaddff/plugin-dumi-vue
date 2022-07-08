@@ -1,2 +1,0 @@
-
-## Hello fta-dumi-vue!

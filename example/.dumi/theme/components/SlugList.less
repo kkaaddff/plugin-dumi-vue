@@ -1,0 +1,67 @@
+@import (reference) '../style/variables.less';
+
+ul[role='slug-list'] {
+  &:empty {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  li {
+    text-indent: 0px;
+    padding: 0;
+    font-size: 12px;
+
+    > a.active {
+      color: #1f5de9;
+    }
+
+    &[data-depth='3'] {
+      padding-left: 12px;
+    }
+  }
+
+  li[data-depth='2'] {
+    padding-left: 0;
+    text-indent: 0;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  li[data-depth='3'] {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    + li[data-depth='2'] {
+      margin-top: 10px;
+    }
+  }
+
+  .__dumi-anchor-depth-2 {
+    line-height: 22px;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .__dumi-anchor-depth-3 {
+    line-height: 20px;
+  }
+}
+
+.__dumi-default-layout-toc li .__dumi-anchor-depth-3.active {
+  &::before {
+    background: #ebedf1 !important;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    bottom: 8px;
+    display: inline-block;
+    width: 2px;
+    background: #1f5de9;
+  }
+}

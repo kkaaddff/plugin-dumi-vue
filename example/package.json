@@ -1,26 +1,28 @@
 {
-  "private": true,
-  "name": "fta-dumi-vue",
-  "version": "1.0.0",
+  "name": "vue2-h5-single",
+  "version": "0.0.1",
+  "description": "__DESCRIPTION__",
+  "author": "__AUTHOR__",
   "scripts": {
-    "start": "COMPRESS=none dumi dev",
-    "docs:build": "COMPRESS=none dumi build",
-    "docs:deploy": "gh-pages -d docs-dist",
-    "build": "father-build",
-    "deploy": "npm run docs:build && npm run docs:deploy",
-    "release": "npm run build && npm publish",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "start": "dumi dev",
+    "build": "vite build",
+    "clean": "rimraf lib",
+    "prepublishOnly": "yarn run clean && yarn run build",
+    "deploy_dev": "cross-env DEPLOY_ENV=dev npm run build:docs && fta upload -r ./dist -n vue2-h5-single -t dev -f 1",
+    "deploy_beta": "cross-env DEPLOY_ENV=beta npm run build:docs && fta upload -r ./dist -n vue2-h5-single -t beta -f 1",
+    "deploy_prod": "cross-env DEPLOY_ENV=prod npm run build:docs && fta upload -r ./dist -n vue2-h5-single -t release -z",
+    "build:docs": "dumi build",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "main": "lib/index.es.js",
+  "files": [
+    "lib"
+  ],
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
+    "*.{js,jsx,md,json}": [
       "prettier --write"
     ],
     "*.ts?(x)": [
@@ -28,15 +30,31 @@
     ]
   },
   "dependencies": {
-    "react": "^16.12.0"
+    "react": "^17.0.2"
   },
   "devDependencies": {
-    "@umijs/test": "^3.0.5",
-    "dumi": "^1.0.16",
-    "father-build": "^1.17.2",
+    "@fta/admin-comments": "1.0.2",
+    "@fta/plugin-dumi-vue2": "1.0.0-alpha.4",
+    "@fta/plugins-assets": "^1.0.16",
+    "@types/node": "^18.0.0",
+    "antd": "^4.21.4",
+    "cross-env": "^7.0.2",
+    "dumi": "^1.1.42",
+    "f2-touchemulator": "^0.0.1",
+    "father-build": "^1.20.5-2",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
-    "prettier": "^2.2.1",
+    "lodash-es": "^4.17.21",
+    "prettier": "^2.6.2",
+    "qrcode.react": "^1.0.1",
+    "rimraf": "^3.0.2",
+    "umi-hd": "^5.0.1",
+    "umi-request": "^1.4.0",
+    "vant": "^2.12.46",
+    "vite-plugin-externals": "^0.5.0",
+    "vite-plugin-vue2": "^2.0.1",
+    "vite": "^2.9.13",
+    "vue-template-compiler": "^2.6.14",
     "yorkie": "^2.0.0"
   }
 }

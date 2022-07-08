@@ -1,18 +1,18 @@
 import { defineConfig } from 'dumi';
-import { join, resolve } from 'path';
+import { join } from 'path';
 
 export default defineConfig({
-  title: 'fta-dumi-vue',
-  favicon:
-    'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png',
-  logo:
-    'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png',
+  title: '单物料开发',
   outputPath: 'docs-dist',
+  publicPath: './',
+  history: { type: 'hash' },
   resolve: {
     previewLangs: ['jsx', 'tsx', 'html'],
+    passivePreview: true,
   },
+  // dynamicImport: {},
+  dynamicImportSyntax: {},
   plugins: [join(__dirname, '..', 'lib')],
-  dynamicImport: {},
   targets: {
     chrome: 90,
     firefox: false,
@@ -23,5 +23,17 @@ export default defineConfig({
   alias: {
     '@examples': join(process.cwd(), 'examples'),
   },
+  externals: {
+    vue: 'window.Vue',
+    vant: 'window.vant',
+  },
+  scripts: [
+    'https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.esm.js',
+    'https://cdn.bootcdn.net/ajax/libs/vant/2.12.47/vant.js',
+    `(function(){
+          window.Vue.use(window.vant);
+      })();`,
+  ],
+  styles: ['https://cdn.bootcdn.net/ajax/libs/vant/2.12.47/index.css'],
   // more config: https://d.umijs.org/config
 });

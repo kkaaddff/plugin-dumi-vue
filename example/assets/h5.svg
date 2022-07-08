@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_h5</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon_h5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval-4" fill="#6190E8" fill-rule="nonzero" cx="12" cy="12" r="12"></circle>
+        <path d="M6,6 L18,6 L17,18 L12.085039,20 L7,18 L6,6 Z M8,8 L8.5,12.6 L14,12.6 L13.8,15 L12.0045871,15.5 L10.2,15 L10,13.6 L8.6,13.6 L9,16 L12.0045871,17 L15,16 L15.5,11.3 L10,11.3 L9.8,9.8 L15.7951926,9.8 L16,8 L8,8 Z" id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+    </g>
+</svg>
